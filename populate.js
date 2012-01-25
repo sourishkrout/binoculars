@@ -1,6 +1,8 @@
 var fs = require('fs');
 var redis = require('redis');
 
+// Code copied at the courtesy of http://blog.jaeckel.com/2010/03/i-tried-to-find-example-on-using-node.html
+// Gets the job done. I'm not a big fan of the un-node-like API though.
 var FileLineReader = function(filename, bufferSize) {  
   
     if(!bufferSize) {  
