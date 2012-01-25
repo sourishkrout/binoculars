@@ -80,6 +80,13 @@
 						map.update();
 					});
 				});
+				$('#zoomout').each(function(idx) {
+					$(this).click(function(e) { 
+						var zl = map.config.getZoomLevelIndex(); 
+						map.setZoomLevel(--zl); 
+						map.update();
+					});
+				});
 			};
 		</script>
 		
@@ -90,16 +97,21 @@
 				border: 1px solid black;
 			}
 			
-			#zoomin {
+			#controls {
 				position: relative;
 				top: 840px;
+			}
+			
+			#zoomout {
+				
 			}
 		</style>
 	</header>
 	<body>
 		<h1>Binoculars</h1>
-		<div>
+		<div id="controls">
 			<input type="button" value="Zoom in" id="zoomin" />
+			<input type="button" value="Zoom out" id="zoomout" />
 		</div>
 		<div id="map" />
 	</body>
