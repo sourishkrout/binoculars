@@ -43,7 +43,7 @@
 				src += level;
 				src += this.getFileType();
 				
-				return ('http://localhost:8080/tiles?tile=' + escape(src));
+				return ('http://67.188.118.244:8080/tiles?tile=' + escape(src) + '&cz=' + level);
 			};
 			
 			var map = null;
@@ -93,13 +93,13 @@
 		<style type="text/css">
 			div#map {
 				width: 800px;
-				height: 800px;
+				height: 700px;
 				border: 1px solid black;
 			}
 			
 			#controls {
 				position: relative;
-				top: 840px;
+				top: 820px;
 			}
 			
 			#zoomout {
@@ -110,6 +110,12 @@
 	<body>
 		<h1>Binoculars</h1>
 		<div id="controls">
+			<p>
+				The brighter the green of the tile the more its been viewed by all public users. Darker red's the opposite.
+			</p>
+			<p>
+				Brought to you by node.js using canvas, redis and apache pig/hadoop.
+			</p>
 			<input type="button" value="Zoom in" id="zoomin" />
 			<input type="button" value="Zoom out" id="zoomout" />
 		</div>
