@@ -68,6 +68,9 @@ var Populate = function() {
 	while (reader.hasNextLine()) {
 		var line = reader.nextLine();
 		
+		if (line.indexOf('/map') < 0)
+			continue;
+		
 		var tile = line.split('	');
 		var count = parseInt(tile[1]);
 		
