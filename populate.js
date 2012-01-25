@@ -81,6 +81,20 @@ var Populate = function() {
 	}
 	
 	client.set('highest', highest, redis.print);
+	
+	var reader2 = FileLineReader('maxd.txt', 1024);
+	
+	while (reader2.hasNextLine()) {
+		var line = reader2.nextLine();
+		
+		if (line.indexOf('zoomlevel') < 0)
+			continue;
+			
+		var chunks = line.split('	');
+		var count = chunks[1];
+		
+		client.set(chunks[0], count, redis.print);
+	}
 }
 
 if (!module.parent)
