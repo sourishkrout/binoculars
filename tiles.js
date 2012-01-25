@@ -23,6 +23,7 @@ var Tiles = function(req, res, cb) {
 	
 	var client = redis.createClient();
 	var tile = req.param('tile', '');
+	var cz = req.param('cz', '');
 	
 	client.get(tile, function(err, reply) {
 		var count = 0;
@@ -33,7 +34,7 @@ var Tiles = function(req, res, cb) {
 		// console.log(tile + ': ' + count);
 		
 		res.writeHead(200, { 'Content-Type': 'image/png', 'X-Count': count, 'max-age': 60 });
-		client.get('highest', function(err, high) {
+		client.get('zoomlevel' + cz, function(err, high) {
 			produceTile(count, high, function(err, result) { cb(result); });
 		});
 	});
