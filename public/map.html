@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<title>Binoculars</title>
+		<script type="text/javascript" src="jquery-1.4.4.min.js"> </script>
+		
+		<script type="text/javascript" src="http://tripplanner.transit.511.org/mdv/mdvMap/mdvMap.js"> </script>
+		<script type="text/javascript" src="http://tripplanner.transit.511.org/mdv/mdvMap/mdvMapPngTooltip.js"> </script>
+		<script type="text/javascript" src="http://tripplanner.transit.511.org/mdv/mdvMap/mdvMapControlOak.js"> </script>
+		<script type="text/javascript" src="http://tripplanner.transit.511.org/mdv/mdvMap/MDVMapScale.Oak.js"> </script>		
+		
+		<script type="text/javascript" src="http://maps.tripplanner.transit.511.org/maps/oak/script/map256Settings.js" type="text/javascript"> </script>
+		<script type="text/javascript" src="http://maps.tripplanner.transit.511.org/maps/oak/script/map256Settings4mini.js" type="text/javascript"> </script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#map').each(function(idx) {
+					startMap(this);
+				});
+			});
+			
+			var giurl = function(x, y) {
+				var src = '/maps/oak/tiles/';
+				var level = this.mdvMap.config.getZoomLevelIndex();
+				var block   = this.getBlock();
+
+				var columnMin = Math.floor((this.mdvMap.startTileWidth + x) / block) * block;
+				var columnMax = columnMin + block-1;
+
+				var rowMin    = Math.floor((this.mdvMap.startTileHeight + y) /block) * block;
+				var rowMax    = rowMin + block - 1;
+
+				src += 'zoomlevel';
+				src += level;
+				src += '/columns' + columnMin + '-' + columnMax; 
+				src += '/column';
+				src += (this.mdvMap.startTileWidth + x);
+				src += '/rows' + rowMin + '-' + rowMax + '/';
+				src += (this.mdvMap.startTileHeight + y);
+				src += '_';
+				src += (this.mdvMap.startTileWidth + x);
+				src += '_';
+				src += level;
+				src += this.getFileType();
+				
+				return ('http://localhost:8080/tiles?tile=' + escape(src));
+			};
+			
+			var map = null;
+			var startMap = function(mapDiv) {
+				map = new MDVMap(mapDiv);
+				
+				cfg = mdvMapConfig.clone();
+				cfg.add('defaultScale', '1');
+				cfg.add('serverURL', 'http://maps.tripplanner.transit.511.org/maps/oak/tiles/');
+				cfg.add('transparentImg', 'transparent.gif');
+				cfg.add('imagePath', '/');
+				cfg.add('mapName', 'MTCV');
+				cfg.add('network', 'OAK');
+				cfg.add('tooltipHandler', 'onclick');
+				cfg.add('useMagnifyGlass', 'true');
+				cfg.add('zoomOnDoubleClick', 'true');
+				cfg.add('xCenterReal', '562725');
+				cfg.add('yCenterReal', '841665');
+				cfg.add('block', '100');
+
+				cfg.add('useToolTipScrollToFit', 'true');
+				cfg.add('hotspotOnMouseWheel', 'true');
+				
+				var overlay0 = map.createOverlay('Binoculars', '', giurl);
+				map.addOverlay(overlay0);
+				
+				new MDVMapNavigator(map);
+				map.execute(cfg);
+				
+				$('#zoomin').each(function(idx) {
+					$(this).click(function(e) { 
+						var zl = map.config.getZoomLevelIndex(); 
+						map.setZoomLevel(++zl); 
+						map.update();
+					});
+				});
+			};
+		</script>
+		
+		<style type="text/css">
+			div#map {
+				width: 800px;
+				height: 800px;
+				border: 1px solid black;
+			}
+			
+			#zoomin {
+				position: relative;
+				top: 840px;
+			}
+		</style>
+	</header>
+	<body>
+		<h1>Binoculars</h1>
+		<div>
+			<input type="button" value="Zoom in" id="zoomin" />
+		</div>
+		<div id="map" />
+	</body>
+</html>

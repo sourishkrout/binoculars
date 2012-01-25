@@ -1,0 +1,12 @@
+{
+  "name": "binoculars",
+  "version": "0.0.1",
+  "description": "Visualize map tiles usage interactively.",
+  "author": "Sebastian Tiedtke",
+  "dependencies": {
+    "express": "2.5.x",
+	"canvas": "0.10.x",
+	"hiredis": "0.1.*",
+	"redis": "0.7.x"
+  }
+}
