@@ -1,5 +1,5 @@
 -- Load fields from log data
-logs = load '../tileusagedata/ex*.log' using PigStorage(' ') as (date, time, server, ipaddr, method, url);
+logs = load '../../../data/tileusagedata/farm/*/*.log' using PigStorage(' ') as (date, time, server, ipaddr, method, url);
 -- We wanna count unique hits for URLs
 grpd = group logs by url;
 -- That's how our output file will look like
