@@ -29,7 +29,7 @@ var Tiles = function(req, res, cb) {
 		var count = 0;
 		if (reply != null) count = reply;
 
-		console.log(tile + ': ' + reply);
+		// console.log(tile + ': ' + reply);
 		
 		res.writeHead(200, { 'Content-Type': 'image/png', 'X-Count': count, 'max-age': 60 });
 		client.get('zoomlevel' + cz, function(err, high) {
