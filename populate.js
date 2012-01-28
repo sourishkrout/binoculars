@@ -60,7 +60,7 @@ var FileLineReader = function(filename, bufferSize) {
     return this;  
 };
 
-var Populate = function() {
+var populate = function() {
 	var client = redis.createClient();
 	var highest = -1;
 	
@@ -100,4 +100,4 @@ var Populate = function() {
 }
 
 if (!module.parent)
-	Populate();
+	populate();
