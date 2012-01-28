@@ -1,7 +1,7 @@
 {
   "name": "binoculars",
   "version": "0.0.1",
-  "description": "Visualize map tiles usage interactively.",
+  "description": "Visualize geo spatial map tile usage interactively using a heat map overlay.",
   "author": "Sebastian Tiedtke",
   "dependencies": {
     "express": "2.5.x",
