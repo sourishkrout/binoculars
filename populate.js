@@ -62,7 +62,6 @@ var FileLineReader = function(filename, bufferSize) {
 
 var populate = function() {
 	var client = redis.createClient();
-	var highest = -1;
 	
 	var reader = FileLineReader('data.txt', 1024);
 	var tiles = [];
@@ -75,14 +74,9 @@ var populate = function() {
 		
 		var tile = line.split('	');
 		var count = parseInt(tile[1]);
-		
-		if (count > highest)
-			highest = count;
-		
+				
 		client.set(tile[0], count);
 	}
-	
-	client.set('highest', highest, redis.print);
 	
 	var reader2 = FileLineReader('maxd.txt', 1024);
 	
