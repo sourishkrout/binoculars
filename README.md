@@ -1,3 +1,5 @@
+<img src="https://github.com/sourishkrout/binoculars/raw/master/public/binoculars.png">
+
 # Binoculars
 Visualize geo spatial map tile usage interactively using a heat map overlay.
 
