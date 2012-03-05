@@ -9,8 +9,8 @@
 		<script type="text/javascript" src="http://tripplanner.transit.511.org/mdv/mdvMap/mdvMapControlOak.js"> </script>
 		<script type="text/javascript" src="http://tripplanner.transit.511.org/mdv/mdvMap/MDVMapScale.Oak.js"> </script>		
 		
-		<script type="text/javascript" src="http://maps.tripplanner.transit.511.org/maps/oak/script/map256Settings.js" type="text/javascript"> </script>
-		<script type="text/javascript" src="http://maps.tripplanner.transit.511.org/maps/oak/script/map256Settings4mini.js" type="text/javascript"> </script>
+		<script type="text/javascript" src="http://204.94.80.214/maps/oak/script/new0/mdvMapSettings.js" type="text/javascript"> </script>
+		<script type="text/javascript" src="http://204.94.80.214/maps/oak/script/new0/mdvMiniMapSettings.js" type="text/javascript"> </script>
 		
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -51,8 +51,8 @@
 				map = new MDVMap(mapDiv);
 				
 				cfg = mdvMapConfig.clone();
-				cfg.add('defaultScale', '1');
-				cfg.add('serverURL', 'http://maps.tripplanner.transit.511.org/maps/oak/tiles/');
+				cfg.add('defaultScale', '0');
+				cfg.add('serverURL', 'http://204.94.80.214/maps/oak/tiles/');
 				cfg.add('transparentImg', 'transparent.gif');
 				cfg.add('imagePath', '/');
 				cfg.add('mapName', 'MTCV');
@@ -69,10 +69,20 @@
 				
 				var overlay0 = map.createOverlay('Binoculars', '', giurl);
 				map.addOverlay(overlay0);
-				
+
+				map.events.registerEvent(MDVEvent_MAP_INITIALISED, this, function(id, msg, obj) {
+					$('#xCoord').each(function(idx) {
+						this.value = obj.getCentre().clone().x;
+					});
+
+					$('#yCoord').each(function(idx) {
+						this.value = obj.getCentre().clone().y;
+					});
+				});
+
 				new MDVMapNavigator(map);
 				map.execute(cfg);
-				
+
 				$('#zoomin').each(function(idx) {
 					$(this).click(function(e) { 
 						var zl = map.config.getZoomLevelIndex(); 
@@ -87,14 +97,31 @@
 						map.update();
 					});
 				});
+				$('#setCoord').each(function(idx) {
+					$(this).click(function(e) {
+						var c = new MDVCoordinates('MTCV', $('#xCoord').val(), $('#yCoord').val()); 
+						map.setCentre(c);
+						map.update();
+					});
+				});
+
 			};
 		</script>
 		
+	
+	
+	
+	
+	
 		<style type="text/css">
 			div#map {
 				width: 800px;
 				height: 700px;
 				border: 1px solid black;
+			}
+			
+			img {
+				border: 0px solid red;
 			}
 			
 		</style>
@@ -107,6 +134,10 @@
 			</div>
 			<div id="controls">
 				<p>
+					X: <input type="text" id="xCoord" /> Y: <input type="text" id="yCoord" />
+					<input type="button" id="setCoord" value="Set" />
+				</p>
+				<p>
 					The brighter the green of the tile the more its been viewed by all public users. Darker red's the opposite. Use buttons below or mouse to pan and zoom the map view.
 				</p>
 				<p>
@@ -118,3 +149,7 @@
 		</div>
 	</body>
 </html>
+	
+	
+	
+	
