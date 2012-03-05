@@ -11,6 +11,10 @@ app.configure(function(){
     app.use(app.router);
 });
 
+app.get('/', function(req, res) {
+	res.redirect('/map.html');
+});
+
 app.get('/tiles', function(req, res) {
 	var t = tiles.create(req, res, function(tile) {
 		res.end(tile);
@@ -18,5 +22,5 @@ app.get('/tiles', function(req, res) {
 });
 
 if (!module.parent) {
-	app.listen(8080);
+	app.listen(80);
 }
