@@ -1,12 +1,19 @@
 {
   "name": "binoculars",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Visualize geo spatial map tile usage interactively using a heat map overlay.",
   "author": "Sebastian Tiedtke",
   "dependencies": {
     "express": "2.5.x",
-	"canvas": "0.10.x",
-	"hiredis": "0.1.*",
-	"redis": "0.7.x"
+    "canvas": "0.10.x",
+    "hiredis": "0.1.x",
+    "redis": "0.7.x"
+  },
+  "subdomain": "binoculars",
+  "scripts": {
+    "start": "server.js"
+  },
+  "engines": {
+    "node": "v0.6.x"
   }
 }
