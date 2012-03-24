@@ -61,36 +61,41 @@ var FileLineReader = function(filename, bufferSize) {
 };
 
 var populate = function() {
-	var client = redis.createClient();
+	var client = redis.createClient(10194, 'viperfish.redistogo.com');
+  client.auth('28e0ff9834f3d9e160d7e0b59c0b3235');
+  client.on('ready', function() {
 	
-	var reader = FileLineReader('data.txt', 1024);
-	var tiles = [];
-	
-	while (reader.hasNextLine()) {
-		var line = reader.nextLine();
-		
-		if (line.indexOf('/map') < 0)
-			continue;
-		
-		var tile = line.split('	');
-		var count = parseInt(tile[1]);
-				
-		client.set(tile[0], count);
-	}
-	
-	var reader2 = FileLineReader('maxd.txt', 1024);
-	
-	while (reader2.hasNextLine()) {
-		var line = reader2.nextLine();
-		
-		if (line.indexOf('zoomlevel') < 0)
-			continue;
-			
-		var chunks = line.split('	');
-		var count = chunks[1];
-		
-		client.set(chunks[0], count, redis.print);
-	}
+    var reader = FileLineReader('data.txt', 1024);
+    var tiles = [];
+    
+    while (reader.hasNextLine()) {
+      var line = reader.nextLine();
+      
+      if (line.indexOf('/map') < 0)
+        continue;
+      
+      var tile = line.split('	');
+      var count = parseInt(tile[1]);
+          
+      client.set(tile[0], count);
+    }
+    
+    var reader2 = FileLineReader('maxd.txt', 1024);
+    
+    while (reader2.hasNextLine()) {
+      var line = reader2.nextLine();
+      
+      if (line.indexOf('zoomlevel') < 0)
+        continue;
+        
+      var chunks = line.split('	');
+      var count = chunks[1];
+      
+      client.set(chunks[0], count, redis.print);
+    }
+  });
+  
+  client.on('error', function(err) { console.error(err); });
 }
 
 if (!module.parent)
