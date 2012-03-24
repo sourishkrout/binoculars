@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
-	<header>
+<html lang="en">
+	<head>
 		<title>Binoculars</title>
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+
 		<script type="text/javascript" src="jquery-1.4.4.min.js"> </script>
 		
 		<script type="text/javascript" src="http://tripplanner.transit.511.org/mdv/mdvMap/mdvMap.js"> </script>
@@ -92,29 +96,51 @@
 		
 		<style type="text/css">
 			div#map {
-				width: 800px;
-				height: 700px;
+				width: 840px;
+				height: 540px;
 				border: 1px solid black;
 			}
 			
 		</style>
-	</header>
+	</head>
 	<body>
-		<h1>Binoculars</h1>
-		<h3>Visualize geo spatial map tile usage interactively using a heat map overlay.</h3>
-		<div id="main">
-			<div id="map">
-			</div>
-			<div id="controls">
-				<p>
-					The brighter the green of the tile the more its been viewed by all public users. Darker red's the opposite. Use buttons below or mouse to pan and zoom the map view.
-				</p>
-				<p>
-					Brought to you by node.js using canvas, redis and apache pig/hadoop. Find me at <a href="https://github.com/sourishkrout/">https://github.com/sourishkrout/</a>.
-				</p>
-				<input type="button" value="Zoom in" id="zoomin" />
-				<input type="button" value="Zoom out" id="zoomout" />
-			</div>
-		</div>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand">Binoculars</a> 
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="map.html">Home</a>
+              </li>
+              <li>
+                <a href="https://github.com/sourishkrout/">Github</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <p>
+        Visualize geo spatial map tile usage interactively using a heat map overlay.
+      </p>
+      <div id="main">
+        <div id="map">
+        </div>
+        <div id="controls">
+          <p>
+            The brighter the green of the tile the more its been viewed by all public users. Darker red's the opposite. Use buttons below or mouse to pan and zoom the map view.
+          </p>
+          <p>
+            Brought to you by node.js using canvas, redis and apache pig/hadoop. Find me at <a href="https://github.com/sourishkrout/">https://github.com/sourishkrout/</a>.
+          </p>
+        </div>
+        <p>
+          <a type="button" class="btn btn-primary" id="zoomin"><i class="icon-zoom-in icon-white"></i> Zoom in</a>
+          <a type="button" class="btn btn-success" id="zoomout"><i class="icon-zoom-out icon-white"></i>  Zoom out</a>
+        </p>
+      </div>
+    </div>
 	</body>
 </html>
