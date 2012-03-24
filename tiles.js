@@ -23,8 +23,8 @@ var Tiles = function(req, res, cb) {
 		acanvas.toBuffer(function(err, buf) { cb(err, buf); });
 	};
 	
-	var client = redis.createClient(10194, 'viperfish.redistogo.com');
-  client.auth('28e0ff9834f3d9e160d7e0b59c0b3235');
+	var client = redis.createClient();
+  client.auth();
   client.on('error', function(err) {
     conerr++;
     console.error(err + ' (' + conerr + ').');

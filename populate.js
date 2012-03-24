@@ -61,8 +61,8 @@ var FileLineReader = function(filename, bufferSize) {
 };
 
 var populate = function() {
-	var client = redis.createClient(10194, 'viperfish.redistogo.com');
-  client.auth('28e0ff9834f3d9e160d7e0b59c0b3235');
+	var client = redis.createClient();
+  client.auth('');
   client.on('ready', function() {
 	
     var reader = FileLineReader('data.txt', 1024);
