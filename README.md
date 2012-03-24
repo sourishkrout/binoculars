@@ -3,6 +3,8 @@
 # Binoculars
 Visualize geo spatial map tile usage interactively using a heat map overlay.
 
+Check out the binoculars demo at: http://binoculars.nodejitsu.com/map.html
+
 # How it works
 ```binoculars``` provides a zoom-able and pan-able map view of the San Francisco bay area. It'll put a heat map inspired overlay on top of the map. The overlay is based on the view count of each tile. The map tile view count is based on the data from a major site on the web that gets thousands of users every day. Each tile ranges from dark red (no views) to bright green (most views).
 
